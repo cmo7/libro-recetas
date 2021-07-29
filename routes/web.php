@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('portada');
+    return view('portada', [
+        "recetas" => Receta::all();
+    ]);
 });
 
 Route::get('/dashboard', function () {
