@@ -25,7 +25,7 @@ Blog para publicar recetas de cocina.
   * Ingrediente pertenece a muchas recetas 
 * Receta_Ingrediente 
  
-### Migraciones 
+### [Migraciones](/database/migrations/)
  
 #### recetas 
 | Campo       | Tipo    | Restricciones  | Descripción                         |
