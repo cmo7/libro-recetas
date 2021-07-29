@@ -16,14 +16,14 @@ Blog para publicar recetas de cocina.
  
 ### Modelos 
  
-* Receta 
+* [Receta](/app/Models/Receta.php)
   * Receta pertenece a un usuario 
   * Receta tiene muchos ingredientes 
-* User 
+* [User](/app/Models/User.php)
   * User tiene muchas recetas 
-* Ingrediente 
+* [Ingrediente](app/Models/Ingrediente.php)
   * Ingrediente pertenece a muchas recetas 
-* Receta_Ingrediente 
+* [IngredienteReceta](app/Models/IngredienteReceta.php)
  
 ### [Migraciones](/database/migrations/)
  
