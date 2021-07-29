@@ -1,3 +1,5 @@
+![logo](/public/img/logo.png)
+
 # Libro-recetas 
  
 Blog para publicar recetas de cocina. 
