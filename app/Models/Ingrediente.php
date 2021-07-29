@@ -10,6 +10,6 @@ class Ingrediente extends Model
     use HasFactory;
 
     public function recetas() {
-        $this->belongsToMany(Receta::class, 'ingrediente_recetas');
+        $this->belongsToMany(Receta::class, 'ingrediente_recetas')->withPivot('cantidad');
     }
 }
