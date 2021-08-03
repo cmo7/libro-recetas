@@ -70,13 +70,10 @@ Route::post('/receta_nueva', function (Request $request) {
         "extracto" => "required",
     ]);
     $validatedata['user_id'] = auth()->user()->id;
-    //dd($request);
-    dd($request->imagen->extension());
     $imagenreceta = time() . "." . $request->imagen->extension();
 
     $request->imagen->move(public_path('img'),$imagenreceta);
     $validatedata['imagen'] = "/img/$imagenreceta";
-    //dd($validatedata);
     Receta::create($validatedata);
     return redirect('/');
 });

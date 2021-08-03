@@ -1,5 +1,5 @@
 <x-layout-principal>
-    <form action="/receta_nueva" method="POST" enctype="multipart/formdata">
+    <form action="/receta_nueva" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre de la Receta</label>
