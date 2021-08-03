@@ -7,9 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ingrediente extends Model
 {
+    protected $fillable = [
+        'nombre',
+    ];
     use HasFactory;
 
     public function recetas() {
-        $this->belongsToMany(Receta::class, 'ingrediente_recetas')->withPivot('cantidad');
+        return $this->belongsToMany(Receta::class, "ingrediente_recetas")->withPivot('cantidad');
     }
 }
+
+

@@ -21,7 +21,7 @@ class CreateRecetasTable extends Migration
             $table->string('dificultad');
             $table->text('proceso');
             $table->string('extracto');
-            $table->string('imagen');
+            $table->string('imagen')->nullable();
             $table->foreignId('user_id');
             $table->timestamps();
         });

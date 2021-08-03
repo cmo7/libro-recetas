@@ -1,7 +1,7 @@
 <x-layout-principal>
-
     <div class="row">
-        @foreach ($todaslasrecetas as $receta)
+        <h1 class="display-5 fw-bold text-dark">{{ $user->name }}</h1>
+        @foreach ($user->recetas as $receta)
             <div class="col-3 g-3">
                 <div class="card mx-auto" style="">
                     <img src="{{$receta->imagen}}" class="card-img-top" alt="...">
@@ -20,8 +20,6 @@
                     </div>
                 </div>
             </div>
-
         @endforeach
     </div>
-
 </x-layout-principal>
