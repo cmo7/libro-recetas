@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Receta;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 class RecetaFactory extends Factory
 {
@@ -23,14 +23,14 @@ class RecetaFactory extends Factory
     public function definition()
     {
         return [
-            "nombre" => $this->faker->sentence(),
-            "tiempo" => $this->faker->time(),
-            "comensales" => random_int(1, 8),
-            "dificultad" => $this->faker->randomElement(['Facil', 'Medio', 'Dificil']),
-            "proceso" => implode(" ", $this->faker->paragraphs(3)),
-            "extracto" => $this->faker->sentence(),
-            "imagen" => "https://lorempixel.com/400/200/food/",
-            "user_id" => random_int(1, User::all()->count() - 1),
+            'nombre' => $this->faker->sentence(),
+            'tiempo' => $this->faker->time($format = 'H:i:s', $max = 'now'),
+            'comensales' => random_int(1,8),
+            'dificultad' => $this->faker->randomElement(['Fácil', 'Media', 'Difícil']),
+            'proceso' => $this->faker->realText(),
+            'extracto' => $this->faker->sentence(),
+            'imagen' => "https://lorempixel.com/400/200/food/",
+            'user_id' => random_int(1,User::all()->count()),
         ];
     }
 }

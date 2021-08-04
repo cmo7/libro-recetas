@@ -24,7 +24,7 @@ class IngredienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('formulario-ingrediente');
     }
 
     /**
@@ -35,7 +35,9 @@ class IngredienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedata = $request->validate(["nombre"=>"required"]);
+        Ingrediente::create($validatedata);
+        return redirect('/');
     }
 
     /**
@@ -44,7 +46,7 @@ class IngredienteController extends Controller
      * @param  \App\Models\Ingrediente  $ingrediente
      * @return \Illuminate\Http\Response
      */
-    public function show(Ingrediente $ingrediente)
+    public function show()
     {
         //
     }

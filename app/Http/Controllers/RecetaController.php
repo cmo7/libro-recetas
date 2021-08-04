@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Receta;
 use Illuminate\Http\Request;
+use App\Models\IngredienteReceta;
+use App\Models\Ingrediente;
 
 class RecetaController extends Controller
 {
@@ -24,7 +26,9 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        //
+        return view('formulario-receta', [
+            "ingredientes" => Ingrediente::all(),
+        ]);
     }
 
     /**
@@ -35,7 +39,33 @@ class RecetaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedata = $request->validate([
+            "nombre" => "required|string",
+            "tiempo" => "required",
+            "comensales" => "required|numeric|min:1",
+            "dificultad" => "required|string",
+            "proceso" => "required",
+            "extracto" => "required",
+        ]);
+        $validatedata['user_id'] = auth()->user()->id;
+
+        $imagenreceta = time() . "." . $request->imagen->extension();
+
+        $request->imagen->move(public_path('img'),$imagenreceta);
+        $validatedata['imagen'] = "/img/$imagenreceta";
+
+        $receta = Receta::create($validatedata);
+
+        foreach ($request->ingredientes as $ingrediente) {
+            IngredienteReceta::create([
+                "receta_id" => $receta->id,
+                "ingrediente_id" => $ingrediente,
+                "cantidad" => "1 gramo"
+            ]);
+        }
+
+
+        return redirect('/');
     }
 
     /**
@@ -44,9 +74,11 @@ class RecetaController extends Controller
      * @param  \App\Models\Receta  $receta
      * @return \Illuminate\Http\Response
      */
-    public function show(Receta $receta)
+    public function show($id)
     {
-        //
+        return view('receta', [
+            "receta" => Receta::findOrFail($id),
+        ]);
     }
 
     /**
@@ -78,8 +110,12 @@ class RecetaController extends Controller
      * @param  \App\Models\Receta  $receta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Receta $receta)
+    public function destroy(Request $request)
     {
-        //
+        $receta = Receta::findOrFail($request["id"]);
+        if($receta->user_id == auth()->user()->id) {
+            $receta->delete();
+        }
+        return redirect('/');
     }
 }

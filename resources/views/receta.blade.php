@@ -10,14 +10,24 @@
     <div class="row">
         <div class="col-md-6">
             <div class="row">
-                <h5><i class="bi bi-alarm-fill"></i> {{$receta->tiempo}} </h5>
-                <h5><i class="bi bi-chevron-double-up"></i> {{$receta->dificultad}}</h5>
-                <h5><i class="bi bi-people-fill"></i> {{$receta->comensales}}</h5>
+                <h5><i class="bi bi-alarm-fill"></i> {{ $receta->tiempo }} </h5>
+                <h5><i class="bi bi-chevron-double-up"></i> {{ $receta->dificultad }}</h5>
+                <h5><i class="bi bi-people-fill"></i> {{ $receta->comensales }}</h5>
             </div>
             <div class="row">
                 <h3>Elaboración</h3>
-                <p>{{$receta->proceso}}</p>
+                <p>{{ $receta->proceso }}</p>
             </div>
+            @auth
+                @if ($receta->user_id == auth()->user()->id)
+                    <form action="/borrar_receta" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $receta->id }}">
+                        <input type="submit" class="btn btn-danger" value="Borrar">
+                    </form>
+                @endif
+            @endauth
+
         </div>
 
         <div class="col-md-6">
@@ -28,7 +38,8 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     @foreach ($receta->ingredientes as $ingrediente)
-                        <li class="list-group-item">{{$ingrediente->nombre}} : {{$ingrediente->pivot->cantidad}}</li>
+                        <li class="list-group-item">{{ $ingrediente->nombre }} : {{ $ingrediente->pivot->cantidad }}
+                        </li>
                     @endforeach
                 </ul>
             </div>
