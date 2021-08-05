@@ -53,13 +53,18 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <form action="/comentario_nuevo" method="post">
+                            <h4>Comenta ésta receta</h4>
                             @csrf
                             <input type="hidden" name="receta_id" value="{{ $receta->id }}">
-                            <label for="contenido" class="form-label">Tu Comentario</label>
-                            <input type="text" name="contenido" id="contenido" class="form-control">
-                            <label for="puntuacion" class="form-label"></label>
-                            <input class="form-range" type="range" name="puntuacion" id="puntuacion" min="0" max="10"
-                                step="1">
+                            <div class="mb-3">
+                                <label for="contenido" class="form-label">Tu Comentario</label>
+                                <input type="text" name="contenido" id="contenido" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="puntuacion" class="form-label">Puntuación</label>
+                                <input class="form-range" type="range" name="puntuacion" id="puntuacion" min="0" max="10"
+                                    step="1">
+                            </div>
                             <input class="btn btn-primary" type="submit" value="Enviar">
                         </form>
                     </div>
