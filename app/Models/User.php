@@ -44,4 +44,8 @@ class User extends Authenticatable
     public function recetas() {
         return $this->hasMany(Receta::class);
     }
+
+    public function comentarios() {
+        return $this->hasMany(Comentario::class);
+    }
 }

@@ -46,5 +46,52 @@
         </div>
     </div>
 
+    <h3>Comentarios</h3>
+    @auth
+        <div class="row">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form action="/comentario_nuevo" method="post">
+                            @csrf
+                            <input type="hidden" name="receta_id" value="{{ $receta->id }}">
+                            <label for="contenido" class="form-label">Tu Comentario</label>
+                            <input type="text" name="contenido" id="contenido" class="form-control">
+                            <label for="puntuacion" class="form-label"></label>
+                            <input class="form-range" type="range" name="puntuacion" id="puntuacion" min="0" max="10"
+                                step="1">
+                            <input class="btn btn-primary" type="submit" value="Enviar">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endauth
+    <div class="row">
+        @if ($receta->comentarios->count() > 0)
+            @foreach ($receta->comentarios as $comentario)
+                <div class="col">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="/user/{{ $comentario->user_id }}">{{ $comentario->user->name }} </a>
+                                {{ $comentario->created_at->locale('es')->diffForHumans() }}
+                            </h5>
+                            @for ($i = 0; $i < $comentario->puntuacion; $i++)
+                                ⭐
+                            @endfor
+                            <br>
+                            {{ $comentario->contenido }}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @else
+            <div class="alert alert-secondary" role="alert">
+                Aun no hay comentarios
+            </div>
+        @endif
+    </div>
+
 
 </x-layout-principal>
