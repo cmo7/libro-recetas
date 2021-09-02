@@ -51,17 +51,19 @@ class RecetaController extends Controller
 
         $imagenreceta = time() . "." . $request->imagen->extension();
 
-        $request->imagen->move(public_path('img'),$imagenreceta);
+        $request->imagen->move(public_path('img'), $imagenreceta);
         $validatedata['imagen'] = "/img/$imagenreceta";
 
         $receta = Receta::create($validatedata);
 
-        foreach ($request->ingredientes as $ingrediente) {
-            IngredienteReceta::create([
-                "receta_id" => $receta->id,
-                "ingrediente_id" => $ingrediente,
-                "cantidad" => "1 gramo"
-            ]);
+        if ($request->ingredientes) {
+            foreach ($request->ingredientes as $ingrediente) {
+                IngredienteReceta::create([
+                    "receta_id" => $receta->id,
+                    "ingrediente_id" => $ingrediente,
+                    "cantidad" => "1 gramo"
+                ]);
+            }
         }
 
 
@@ -113,7 +115,7 @@ class RecetaController extends Controller
     public function destroy(Request $request)
     {
         $receta = Receta::findOrFail($request["id"]);
-        if($receta->user_id == auth()->user()->id) {
+        if ($receta->user_id == auth()->user()->id) {
             $receta->delete();
         }
         return redirect('/');

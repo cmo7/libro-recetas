@@ -5,14 +5,14 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre de la Receta</label>
-                    <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre Receta ">
+                    <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre Receta">
                     @error('nombre')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="tiempo" class="form-label">Tiempo de preparación</label>
-                    <input name="tiempo" type="time" class="form-control" id="numero" placeholder="Tiempo de preparación ">
+                    <input name="tiempo" type="time" class="form-control" id="tiempo" placeholder="Tiempo de preparación ">
                     @error('tiempo')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -26,7 +26,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="dificultad" class="form-label">Dificultad de la Receta</label>
-                    <select name="dificultad" class="form-select" aria-label="Default select example">
+                    <select id="dificultad" name="dificultad" class="form-select" aria-label="Default select example">
                         <option selected>Dificultad</option>
                         <option value="Fácil">Fácil</option>
                         <option value="Medio">Medio</option>
